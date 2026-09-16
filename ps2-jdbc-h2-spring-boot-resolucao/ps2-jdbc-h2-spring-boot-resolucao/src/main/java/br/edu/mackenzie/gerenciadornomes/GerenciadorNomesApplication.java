@@ -14,26 +14,20 @@ public class GerenciadorNomesApplication implements CommandLineRunner {
 
     public static void main(String[] args) {
         SpringApplication.run(GerenciadorNomesApplication.class, args);
+
     }
 
     @Override
     public void run(String... args) {
 
         // Conexao com banco de dados
-        String url = "jdbc:h2:file:./data/banco_dados";
-        String usuario = "admin";
-        String senha = "admin";
+        String url = "jdbc:postgresql://aws-0-sa-east-1.pooler.supabase.com:5432/postgres";
+        String usuario = "postgres.ezecdfspifhcuqftareh";
+        String senha = "Senha com certeza é uma senha";
 
         try (Connection connection =
                 DriverManager.getConnection(url, usuario, senha);
-            Statement statement = connection.createStatement()) {
-
-            statement.execute("""
-                CREATE TABLE IF NOT EXISTS nomes (
-                    nome VARCHAR(256) NOT NULL UNIQUE
-                )
-                """);
-            
+            Statement statement = connection.createStatement()) {            
             codigoAnterior(connection);
 
         } catch (Exception e) {
